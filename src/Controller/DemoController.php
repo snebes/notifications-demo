@@ -6,6 +6,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Notification\DemoNotification;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use SN\Bundle\NotificationsBundle\Entity\Notification;
 use SN\Notifications\NotificationSender;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,17 +17,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class DemoController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/", name="demo")
      *
-     * @param RegistryInterface $registry
      * @param NotificationSender $notificationSender
      *
      * @return Response
      */
-    public function test(RegistryInterface $registry, NotificationSender $notificationSender): Response
+    public function test(NotificationSender $notificationSender): Response
     {
-        $em = $registry->getManager();
-        $user = $registry->getRepository(User::class)->findOneBy(['name' => 'Demo']);
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->findOneBy(['name' => 'Demo']);
 
         if (null === $user) {
             $user = new User();
@@ -39,5 +40,20 @@ class DemoController extends AbstractController
         return $this->render('base.html.twig', [
             'user' => $user,
         ]);
+    }
+
+    /**
+     * @Route("/read/{notification}", name="mark_read")
+     * @ParamConverter("notification", class=Notification::class)
+     */
+    public function read(Notification $notification): Response
+    {
+        $notification->setReadAt(new \DateTime());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($notification);
+        $em->flush();
+
+        return $this->redirectToRoute('demo');
     }
 }

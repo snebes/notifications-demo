@@ -22,6 +22,7 @@
                     {% for notification in user.unreadNotifications|slice(0, 5) %}
                         <div class="dropdown-item">
                             {{- notification.data['message'] -}}
+                            <a href="{{ path('mark_read', { notification: notification.id }) }}" class="btn btn-primary ml-3">Mark Read</a>
                         </div>
                     {% endfor %}
                 </div>
