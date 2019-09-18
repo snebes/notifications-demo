@@ -26,5 +26,6 @@ Open the displayed URL in your browser of choice.  Click the buttons to create e
 
 ### Screenshots
 
-![https://user-images.githubusercontent.com/666333/65102683-7355d100-d991-11e9-9a3f-3dc186df69fc.png]
+![screen:demo]
 
+[screen:demo]: https://user-images.githubusercontent.com/666333/65102683-7355d100-d991-11e9-9a3f-3dc186df69fc.png
