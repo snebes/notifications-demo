@@ -9,7 +9,6 @@ use App\Notification\DemoNotification;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use SN\Bundle\NotificationsBundle\Entity\Notification;
 use SN\Notifications\NotificationSender;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
