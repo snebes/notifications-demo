@@ -2,33 +2,36 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Welcome!</title>
+    <title>Demo time!</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
     <nav class="navbar navbar-expand navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="#">Notification Demo</a>
+    </nav>
 
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Notifications
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    {% for notification in user.unreadNotifications|slice(0, 5) %}
-                        <div class="dropdown-item">
-                            {{- notification.data['message'] -}}
-                            <a href="{{ path('mark_read', { notification: notification.id }) }}" class="btn btn-primary ml-3">Mark Read</a>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <a class="btn btn-primary btn-block mb-3" href="{{ path('demo_db') }}">Send Database Notification</a>
+                <a class="btn btn-primary btn-block mb-3" href="{{ path('demo_mail') }}">Send Mail Notification</a>
+                <a class="btn btn-primary btn-block mb-3" href="{{ path('demo_both') }}">Both Mail &amp; Database Notification</a>
+            </div>
+
+            <div class="col">
+                <h5 class="border-bottom pb-2 mb-3">Database Notifications: <small class="text-muted">(10 Most Recent)</small></h5>
+                <div class="list-group">
+                    {% for notification in user.unreadNotifications|slice(0, 10) %}
+                        <div class="list-group-item">
+                            <p>{{ notification.data['message'] }}</p>
+                            <a href="{{ path('mark_read', { notification: notification.id }) }}" class="btn btn-outline-danger">Mark Read</a>
                         </div>
                     {% endfor %}
                 </div>
-            </li>
-        </ul>
-    </nav>
+            </div>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
