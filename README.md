@@ -24,6 +24,10 @@ symfony server:start
 
 Open the displayed URL in your browser of choice.  Click the buttons to create example notifications.
 
+### Demo
+
+You can see the most recent database notifications directly in the application.  All mail notifications are spooled to disk and never sent.  They can be viewed under the `var/spool` folder.
+
 ### Screenshots
 
 ![screen:demo]
